@@ -34,6 +34,6 @@
       if (!method_exists('Controllers', $controllerAction)) {
         $controllerAction = 'Error404';
       }
-      call_user_func_array([new Controllers, $controllerAction], $this->params);
+      call_user_func_array([new Controllers, $controllerAction], [$this->params]);
     }
   }

@@ -1,6 +1,4 @@
 <?php
-  require_once '../vendor/autoload.php';
-
   class Controllers {
     function __construct() {
       $loader = new Twig_Loader_Filesystem('../views');
@@ -25,5 +23,32 @@
 
     function Error404() {
       echo $this->twig->render('error.html');
+    }
+
+    function AdminIndex() {
+      if (!Authentication::checkLogin()) {
+        header('location: /admin/login');
+        die();
+      }
+    }
+    
+    function AdminLogin($request) {
+      if (Authentication::checkLogin()) {
+        header('location: /admin');
+        die();
+      }
+      if (isset($request['form']['token']) 
+        && Authentication::verifyCSRFToken('admin_login', $request['form']['token']) 
+        && Authentication::login($request['form']['username'], $request['form']['password'])
+      ) {
+        var_dump($_SESSION);
+      } else {
+        echo $this->twig->render('login.html', ['token'=>Authentication::generateCSRFToken('admin_login')]);
+      }
+    }
+
+    function AdminLogout() {
+      Authentication::logout();
+      header('location: /');
     }
   }
