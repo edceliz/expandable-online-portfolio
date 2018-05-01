@@ -15,17 +15,18 @@ body {
 
 .container {
   @extend %flexbox;
+  align-items: flex-start;
   max-width: 1366px;
   margin: auto;
 }
 
 header {
+  @extend %boxshadow;
   background-color: $secondary-color;
   width: 30%;
   margin-left: 2em;
   padding: 1.5em 1.5em 0;
   max-width: 240px;
-  box-shadow: 1px 1px 2px 1px #aaa;
   .image__container {
     text-align: center;
     img {
@@ -55,6 +56,9 @@ header {
         color: #fff;
         font-weight: 600;
       }
+      a.active {
+        border: 2px solid $white;
+      }
     }
     li:nth-child(1) {
       background-color: #9b59b6;
@@ -65,11 +69,8 @@ header {
     li:nth-child(3) {
       background-color: #2ecc71;
     }
-    li:nth-child(4) {
-      background-color: #1abc9c;
-    }
   }
-  @media screen and (max-width: 800px) {
+  @media screen and (max-width: 960px) {
     width: 100%;
     max-width: none;
     margin: 0;
@@ -88,5 +89,34 @@ p {
 p.subtitle {
   color: $white;
   text-align: center;
-  font-style: italic;
+}
+
+main {
+  margin: 0 2em;
+  flex: 1;
+  .page__title {
+    @extend %boxshadow;
+    padding: 1em;
+    background-color: #1abc9c;
+    h2 {
+      font-size: $header-font-size * .7;
+      color: #fff;
+    }
+  }
+  @media screen and (max-width: 960px) {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 2em 0 0;
+    .page__title {
+      display: none;
+    }
+  }
+}
+
+footer {
+  margin: 1em 0;
+  font-weight: 600;
+  text-align: center;
+  color: #999;
 }

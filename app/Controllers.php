@@ -19,7 +19,11 @@
       echo $this->twig->render('index.html');
     }
 
+    function ContactIndex() {
+      echo $this->twig->render('contact.html');
+    }
+
     function Error404() {
-      echo $this->twig->render('error.html', array('name' => 'error'));
+      echo $this->twig->render('error.html');
     }
   }

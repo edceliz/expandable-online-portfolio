@@ -2,17 +2,21 @@
   display: flex;
   flex-wrap: wrap; }
 
+header, main .page__title {
+  box-shadow: 1px 1px 2px 1px #ddd; }
+
 * {
   font-family: Arial, Helvetica, sans-serif;
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  color: #333; }
+  color: #666; }
 
 body {
   background-color: #eee; }
 
 .container {
+  align-items: flex-start;
   max-width: 1366px;
   margin: auto; }
 
@@ -21,8 +25,7 @@ header {
   width: 30%;
   margin-left: 2em;
   padding: 1.5em 1.5em 0;
-  max-width: 240px;
-  box-shadow: 1px 1px 2px 1px #aaa; }
+  max-width: 240px; }
   header .image__container {
     text-align: center; }
     header .image__container img {
@@ -48,15 +51,15 @@ header {
         text-decoration: none;
         color: #fff;
         font-weight: 600; }
+      header nav li a.active {
+        border: 2px solid #fff; }
     header nav li:nth-child(1) {
       background-color: #9b59b6; }
     header nav li:nth-child(2) {
       background-color: #3498db; }
     header nav li:nth-child(3) {
       background-color: #2ecc71; }
-    header nav li:nth-child(4) {
-      background-color: #1abc9c; }
-  @media screen and (max-width: 800px) {
+  @media screen and (max-width: 960px) {
     header {
       width: 100%;
       max-width: none;
@@ -71,7 +74,30 @@ p {
 
 p.subtitle {
   color: #fff;
+  text-align: center; }
+
+main {
+  margin: 0 2em;
+  flex: 1; }
+  main .page__title {
+    padding: 1em;
+    background-color: #1abc9c; }
+    main .page__title h2 {
+      font-size: 1.4em;
+      color: #fff; }
+  @media screen and (max-width: 960px) {
+    main {
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      padding: 2em 0 0; }
+      main .page__title {
+        display: none; } }
+
+footer {
+  margin: 1em 0;
+  font-weight: 600;
   text-align: center;
-  font-style: italic; }
+  color: #999; }
 
 /*# sourceMappingURL=base.css.map */

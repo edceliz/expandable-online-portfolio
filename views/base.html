@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="/css/base.css">
   <title>{ block title }{ endblock } | Edcel Celiz</title>
   { endblock }
 </head>
@@ -14,22 +14,28 @@
   <div class="container">
     <header>
       <div class="image__container">
-        <img src="img/edcel_celiz_optimized.jpg" alt="Edcel Celiz Image">
+        <img src="/img/edcel_celiz_optimized.jpg" alt="Edcel Celiz Image">
       </div>
       <h1>Edcel Celiz</h1>
       <p class="subtitle">Website application and artificial intelligence developer from Bacoor, Cavite</p>
       <nav>
         <ul>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Works</a></li>
-          <li><a href="#">Contact</a></li>
-          <li><a href="#">Download Résumé</a></li>
+          <li><a class="{block menu_1 }{ endblock }" href="/">Works</a></li>
+          <li><a class="{block menu_2 }{ endblock }" href="/contact">Contact</a></li>
+          <li><a class="{block menu_3 }{ endblock }" href="#">Download Résumé</a></li>
         </ul>
       </nav>
     </header>
     <main>
       { block main }
+        <section class="page__title">
+          <h2>{ block page_title }{ endblock }</h2>
+        </section>
+        { block content }{ endblock }
       { endblock}
+      <footer>
+        Edcel Celiz &copy; {{ "now"|date("Y") }}
+      </footer>
     </main>
   </div>
   { endblock }

@@ -1,2 +1,41 @@
 { extends "base.html" }
-{ block title }Index{ endblock }
+{ block head }
+  {{ parent() }}
+  <link rel="stylesheet" href="/css/articles.css">
+{ endblock }
+{ block title }Works{ endblock }
+{ block menu_1 }active{ endblock }
+{ block page_title }Works{ endblock }
+{ block content }
+  <h1>{{ hostname }}</h1>
+  <article class="article--left">
+    <div class="article__image">
+      <img src="/img/300x180.png" alt="Sample Image">
+    </div>
+    <div class="article__content">
+      <h3>Sample</h3>
+      <p class="article__subtitle">April 2018 - Present</p>
+      <p class="article__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis reiciendis quo ut hic sequi excepturi repellat, maiores necessitatibus dicta ipsa praesentium magnam sit minus accusantium deleniti, cumque vitae maxime deserunt?Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente deserunt et voluptate numquam doloribus corporis quis quas, labore unde. Sapiente laboriosam illum beatae id voluptates quia est explicabo a accusantium.</p>
+      <a href="#" class="article__cta">Inquire</a>
+    </div>
+  </article>
+  <article class="article--right">
+    <div class="article__content">
+      <h3>Sample</h3>
+      <p class="article__subtitle">April 2018 - Present</p>
+      <p class="article__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente deserunt et voluptate numquam doloribus corporis quis quas, labore unde. Sapiente laboriosam illum beatae id voluptates quia est explicabo a accusantium.</p>
+      <a href="#" class="article__cta">Inquire</a>
+    </div>
+    <div class="article__image">
+      <img src="/img/300x180.png" alt="Sample Image">
+    </div>
+  </article>
+  <article>
+    <div class="article__content">
+      <h3>Sample</h3>
+      <p class="article__subtitle">April 2018 - Present</p>
+      <p class="article__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente deserunt et voluptate numquam doloribus corporis quis quas, labore unde. Sapiente laboriosam illum beatae id voluptates quia est explicabo a accusantium.</p>
+      <a href="#" class="article__cta">Inquire</a>
+    </div>
+  </article>
+{ endblock }
