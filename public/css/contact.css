@@ -1,3 +1,55 @@
+.contact__container section {
+  box-shadow: 1px 1px 2px 1px #ddd; }
 
+.contact__container {
+  display: flex;
+  align-items: flex-start; }
+  .contact__container section {
+    width: 50%;
+    margin-top: 1em;
+    padding: 1em;
+    background-color: #fff; }
+  .contact__container section:first-child {
+    margin-right: 1em; }
+  .contact__container form label {
+    display: inline-block;
+    margin-top: .5em; }
+  .contact__container form input, .contact__container form textarea {
+    padding: .75em;
+    outline: none;
+    border: 2px solid #aaa;
+    border-radius: 2px;
+    margin-top: .5em;
+    width: 100%; }
+  .contact__container form input[type="submit"] {
+    cursor: pointer;
+    color: #fff;
+    background-color: #2a3f54;
+    font-weight: 600;
+    border: 2px solid #2a3f54;
+    transition: ease .25s; }
+  .contact__container form input[type="submit"]:hover {
+    color: #2a3f54;
+    background-color: #fff; }
+  .contact__container form textarea {
+    resize: vertical;
+    min-height: 5em;
+    height: 10em; }
+  .contact__container ul li {
+    list-style: none;
+    margin-top: .5em; }
+    .contact__container ul li a {
+      color: #3498db; }
+  @media screen and (max-width: 960px) {
+    .contact__container {
+      flex-wrap: wrap;
+      flex-direction: column-reverse; }
+      .contact__container section {
+        width: 100%;
+        margin: 0; }
+      .contact__container section:first-child {
+        margin: 0; }
+      .contact__container section:last-child {
+        margin-bottom: 1em; } }
 
 /*# sourceMappingURL=contact.css.map */
