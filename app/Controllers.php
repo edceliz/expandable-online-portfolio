@@ -30,6 +30,23 @@
         header('location: /admin/login');
         die();
       }
+      echo $this->twig->render('admin-works.html');
+    }
+
+    function AdminSettings() {
+      if (!Authentication::checkLogin()) {
+        header('location: /admin/login');
+        die();
+      }
+      echo $this->twig->render('admin-settings.html');
+    }
+
+    function AdminWork() {
+      if (!Authentication::checkLogin()) {
+        header('location: /admin/login');
+        die();
+      }
+      echo $this->twig->render('admin-work.html');
     }
     
     function AdminLogin($request) {
@@ -41,7 +58,7 @@
         && Authentication::verifyCSRFToken('admin_login', $request['form']['token']) 
         && Authentication::login($request['form']['username'], $request['form']['password'])
       ) {
-        var_dump($_SESSION);
+        header('location: /admin');
       } else {
         echo $this->twig->render('login.html', ['token'=>Authentication::generateCSRFToken('admin_login')]);
       }

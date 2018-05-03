@@ -1,0 +1,45 @@
+{ extends "admin-base.html" }
+{ block head }
+  {{ parent() }}
+  <link rel="stylesheet" href="/css/admin.css">
+  <link rel="stylesheet" href="/css/contact.css">
+{ endblock }
+{ block title }Admin{ endblock }
+{ block page_title }Works{ endblock }
+{ block link_2 }active{endblock}
+{ block content }
+<div class="contact__container">
+    <section>
+      <form action="/admin/settings" method="POST" enctype="multipart/form-data" >
+        <h3>Website Settings</h3>
+        <label for="name">Website Name</label>
+        <input type="text" name="name" id="name" placeholder="Website Name" required>
+        <label for="tagline">Website Tagline/Description</label>
+        <input type="text" name="tagline" id="tagline" placeholder="Website Tagline/Description" required>
+        <label for="phone">Phone Number</label>
+        <input type="tel" name="phone" id="phone" placeholder="Phone Number">
+        <label for="facebook">Facebook Account</label>
+        <input type="url" name="facebook" id="facebook" placeholder="https://www.facebook.com/your-profile">
+        <label for="github">GitHub Account</label>
+        <input type="url" name="github" id="github" placeholder="https://www.github.com/your-profile">
+        <label for="resume">Résumé File</label>
+        <input type="file" name="resume" id="resume">
+        <input type="submit" value="Update Settings">
+      </form>
+    </section>
+    <section>
+      <form action="/admin/account" method="POST">
+        <h3>Account Settings</h3>
+        <label for="name">Username</label>
+        <input type="text" name="username" id="username" placeholder="Username" required>
+        <label for="email">E-mail Address</label>
+        <input type="email" name="email" id="email" placeholder="E-mail Address" required>
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" placeholder="New Password" autocomplete="off">
+        <label for="old_password">Confirm Password</label>
+        <input type="password" name="old_password" id="old_password" placeholder="Confirm Password" autocomplete="off" required>
+        <input type="submit" value="Update Account">
+      </form>
+    </section>
+  </div>
+{ endblock }

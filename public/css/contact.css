@@ -26,11 +26,17 @@
     color: #fff;
     background-color: #2a3f54;
     font-weight: 600;
-    border: 2px solid #2a3f54;
-    transition: ease .25s; }
+    border: 2px solid #2a3f54; }
   .contact__container form input[type="submit"]:hover {
+    transition: ease .25s;
     color: #2a3f54;
     background-color: #fff; }
+  .contact__container form input[type="submit"].danger {
+    background-color: rgba(255, 0, 0, 0.808);
+    border: 2px solid rgba(255, 0, 0, 0.808); }
+  .contact__container form input[type="submit"].danger:hover {
+    background-color: #fff;
+    color: rgba(255, 0, 0, 0.808); }
   .contact__container form textarea {
     resize: vertical;
     min-height: 5em;

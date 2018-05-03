@@ -29,9 +29,9 @@ article {
     font-weight: 600;
     background-color: #2a3f54;
     border: 2px solid #2a3f54;
-    color: #fff;
-    transition: ease .25s; }
+    color: #fff; }
   article .article__cta:hover {
+    transition: ease .25s;
     background-color: #fff;
     color: #2a3f54; }
   @media screen and (max-width: 768px) {
