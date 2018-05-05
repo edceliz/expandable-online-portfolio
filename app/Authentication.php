@@ -28,7 +28,7 @@
     }
 
     static function login($username, $password) {
-      $db = Database::getConnection();
+      $db = Database::getInstance()->getConnection();
       $stmt = $db->prepare('SELECT id, password from users WHERE username = ? LIMIT 1');
       $stmt->bind_param('s', $username);
       $stmt->execute();
@@ -45,9 +45,9 @@
     }
 
     static function verifyPassword($password) {
-      $db = Database::getConnection();
+      $db = Database::getInstance()->getConnection();
       $stmt = $db->prepare('SELECT password from users WHERE id = ? LIMIT 1');
-      $stmt->bind_param('i', self::getUser()->uid);
+      $stmt->bind_param('i', self::getUser()->id);
       $stmt->execute();
       $result = $stmt->get_result()->fetch_assoc();
       $stmt->close();

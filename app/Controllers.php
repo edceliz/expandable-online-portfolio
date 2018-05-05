@@ -80,18 +80,17 @@
         || !Authentication::verifyCSRFToken('admin_settings', $request['form']['token'])
         || !Authentication::verifyPassword($request['form']['old_password'])
       ) {
-        header('location: /admin/settings');
+        // header('location: /admin/settings');
+        // die();
+      }
+      if ($request['form']['username'] !== Authentication::getUser()->username || !empty($request['form']['password'])) {
+        Models\User::all();
         die();
       }
-      if ($request['username'] !== Authentication::getUser()->username) {
-        // change username
+      if ($request['form']['email'] !== Models\Configuration::getAll()->email) {
+        Models\Configuration::update(['email' => $request['form']['email']]);
       }
-      if ($request['email'] !== Models\Configuration::getAll()->email) {
-        // change email
-      }
-      if (!empty($request['password'])) {
-        // change password
-      }
+      header('location: /admin/settings');
     }
 
     function AdminWork() {
