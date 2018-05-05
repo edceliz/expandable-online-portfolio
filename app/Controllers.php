@@ -33,12 +33,65 @@
       echo $this->twig->render('admin-works.html');
     }
 
-    function AdminSettings() {
+    function AdminSettings($request) {
       if (!Authentication::checkLogin()) {
         header('location: /admin/login');
         die();
       }
-      echo $this->twig->render('admin-settings.html');
+      if (isset($request['form']['token'])
+        && Authentication::verifyCSRFToken('admin_settings', $request['form']['token'])
+      ) {
+        $file = false;
+        if ($request['files']['resume']['error'] !== 4) {
+          if (!Upload::validateFile($request['files']['resume'], 
+            [
+              'application/msword', 
+              'application/pdf',
+              'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+            ],
+            10485760)
+          ) {
+            header('location: /admin/settings');
+            die();
+          }
+          $file = Upload::complete($request['files']['resume'], 'downloadables/', 'resume');
+        }
+        array_shift($request['form']);
+        $request['form']['resume'] = $file;
+        Models\Configuration::update($request['form']);
+        header('location: /admin/settings');
+        die();
+      }
+      $configuration = Models\Configuration::getAll();
+      echo $this->twig->render('admin-settings.html', [
+        'current' => $configuration, 
+        'token' => Authentication::generateCSRFToken('admin_settings'),
+        'user' => Authentication::getUser()
+        ]
+      );
+    }
+
+    function AdminAccount($request) {
+      if (!Authentication::checkLogin()) {
+        header('location: /admin/login');
+        die();
+      }
+      if (!isset($request['form']['token'])
+        || !Authentication::verifyCSRFToken('admin_settings', $request['form']['token'])
+        || !Authentication::verifyPassword($request['form']['old_password'])
+      ) {
+        header('location: /admin/settings');
+        die();
+      }
+      if ($request['username'] !== Authentication::getUser()->username) {
+        // change username
+      }
+      if ($request['email'] !== Models\Configuration::getAll()->email) {
+        // change email
+      }
+      if (!empty($request['password'])) {
+        // change password
+      }
     }
 
     function AdminWork() {

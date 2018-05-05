@@ -4,7 +4,8 @@
     private $action = 'index';
     private $params = [
       'url' => [], 
-      'form'=> []
+      'form' => [],
+      'files' => []
     ];
 
     function __construct() {
@@ -21,6 +22,7 @@
         $this->params['url'] = $url;
         unset($request['url']);
         $this->params['form'] = $request;
+        $this->params['files'] = $_FILES;
         $this->start();
       }
     }

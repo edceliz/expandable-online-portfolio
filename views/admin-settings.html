@@ -12,29 +12,31 @@
     <section>
       <form action="/admin/settings" method="POST" enctype="multipart/form-data" >
         <h3>Website Settings</h3>
+        <input type="hidden" name="token" value="{{ token }}">
         <label for="name">Website Name</label>
-        <input type="text" name="name" id="name" placeholder="Website Name" required>
+        <input type="text" name="name" id="name" value="{{ current.name }}" placeholder="Website Name" required>
         <label for="tagline">Website Tagline/Description</label>
-        <input type="text" name="tagline" id="tagline" placeholder="Website Tagline/Description" required>
+        <input type="text" name="tagline" id="tagline" value="{{ current.tagline }}" placeholder="Website Tagline/Description" required>
         <label for="phone">Phone Number</label>
-        <input type="tel" name="phone" id="phone" placeholder="Phone Number">
+        <input type="tel" name="phone" id="phone" value="{{ current.phone }}" placeholder="Phone Number">
         <label for="facebook">Facebook Account</label>
-        <input type="url" name="facebook" id="facebook" placeholder="https://www.facebook.com/your-profile">
+        <input type="url" name="facebook" id="facebook" value="{{ current.facebook }}" placeholder="https://www.facebook.com/your-profile">
         <label for="github">GitHub Account</label>
-        <input type="url" name="github" id="github" placeholder="https://www.github.com/your-profile">
-        <label for="resume">Résumé File</label>
-        <input type="file" name="resume" id="resume">
+        <input type="url" name="github" id="github" value="{{ current.github }}" placeholder="https://www.github.com/your-profile">
+        <label for="resume">Résumé File (Max 10 MB PDF or DOC)</label>
+        <input type="file" name="resume" id="resume" accept=".pdf,.doc,.docx">
         <input type="submit" value="Update Settings">
       </form>
     </section>
     <section>
       <form action="/admin/account" method="POST">
         <h3>Account Settings</h3>
+        <input type="hidden" name="token" value="{{ token }}">
         <label for="name">Username</label>
-        <input type="text" name="username" id="username" placeholder="Username" required>
+        <input type="text" name="username" id="username" value="{{ user.username }}" placeholder="Username" required>
         <label for="email">E-mail Address</label>
-        <input type="email" name="email" id="email" placeholder="E-mail Address" required>
-        <label for="password">Password</label>
+        <input type="email" name="email" id="email" value="{{ current.email }}" placeholder="E-mail Address" required>
+        <label for="password">New Password (Optional)</label>
         <input type="password" name="password" id="password" placeholder="New Password" autocomplete="off">
         <label for="old_password">Confirm Password</label>
         <input type="password" name="old_password" id="old_password" placeholder="Confirm Password" autocomplete="off" required>

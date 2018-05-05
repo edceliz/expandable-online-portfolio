@@ -6,7 +6,12 @@
     }
 
     static function verifyCSRFToken($name, $token) {
-      return hash_equals($_SESSION[$name . '_token'], $token);
+      $result = false;
+      if (isset($_SESSION[$name . '_token'])) {
+        $result = hash_equals($_SESSION[$name . '_token'], $token);
+        unset($_SESSION[$name . '_token']);
+      }
+      return $result;
     }
 
     static function logout() {
@@ -32,9 +37,30 @@
       $db->close();
       if ($result && password_verify($password, $result['password'])) {
         $_SESSION['uid'] = $result['id'];
+        $_SESSION['username'] = $username;
         return true;
       } else {
         return false;
       }
+    }
+
+    static function verifyPassword($password) {
+      $db = Database::getConnection();
+      $stmt = $db->prepare('SELECT password from users WHERE id = ? LIMIT 1');
+      $stmt->bind_param('i', self::getUser()->uid);
+      $stmt->execute();
+      $result = $stmt->get_result()->fetch_assoc();
+      $stmt->close();
+      $db->close();
+      return password_verify($password, $result['password']);
+    }
+
+    static function getUser() {
+      $user = (object) ['id' => null, 'username' => null];
+      if (isset($_SESSION['uid'])) {
+        $user->id = $_SESSION['uid'];
+        $user->username = $_SESSION['username'];
+      }
+      return $user;
     }
   }
