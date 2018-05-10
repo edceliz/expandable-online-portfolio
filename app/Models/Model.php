@@ -5,12 +5,12 @@
     protected $db;
     protected $table;
     protected $fillables;
-    protected $result;
+    public $result = [];
 
     private function __construct() {
       $this->db = \Database::getInstance()->getConnection();
       $className = explode('\\', get_class($this));
-      $this->table = strtolower(end($className)) . 's';
+      $this->table = $table ?: strtolower(end($className)) . 's';
     }
 
     static function all() {
