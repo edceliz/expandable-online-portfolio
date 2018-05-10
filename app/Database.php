@@ -31,6 +31,8 @@
     private function __wakeup() {}
 
     function __destruct() {
-      $this->db->close();
+      if ($this->db) {
+        $this->db->close();
+      }
     }
   }

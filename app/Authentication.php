@@ -29,12 +29,12 @@
 
     static function login($username, $password) {
       $db = Database::getInstance()->getConnection();
-      $stmt = $db->prepare('SELECT id, password from users WHERE username = ? LIMIT 1');
+      $stmt = $db->prepare('SELECT id, password FROM users WHERE username = ? LIMIT 1');
       $stmt->bind_param('s', $username);
       $stmt->execute();
       $result = $stmt->get_result()->fetch_assoc();
+      $stmt->free_result();
       $stmt->close();
-      $db->close();
       if ($result && password_verify($password, $result['password'])) {
         $_SESSION['uid'] = $result['id'];
         $_SESSION['username'] = $username;
@@ -51,7 +51,6 @@
       $stmt->execute();
       $result = $stmt->get_result()->fetch_assoc();
       $stmt->close();
-      $db->close();
       return password_verify($password, $result['password']);
     }
 

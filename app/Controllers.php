@@ -1,4 +1,5 @@
 <?php
+  // TODO: Divide into two controllers - front and admin
   class Controllers {
     function __construct() {
       $loader = new Twig_Loader_Filesystem('../views');
@@ -62,7 +63,7 @@
         header('location: /admin/settings');
         die();
       }
-      $configuration = Models\Configuration::getAll();
+      $configuration = Models\Configuration::all();
       echo $this->twig->render('admin-settings.html', [
         'current' => $configuration, 
         'token' => Authentication::generateCSRFToken('admin_settings'),
@@ -80,14 +81,18 @@
         || !Authentication::verifyCSRFToken('admin_settings', $request['form']['token'])
         || !Authentication::verifyPassword($request['form']['old_password'])
       ) {
-        // header('location: /admin/settings');
-        // die();
-      }
-      if ($request['form']['username'] !== Authentication::getUser()->username || !empty($request['form']['password'])) {
-        Models\User::all();
+        header('location: /admin/settings');
         die();
       }
-      if ($request['form']['email'] !== Models\Configuration::getAll()->email) {
+      if ($request['form']['username'] !== Authentication::getUser()->username || !empty($request['form']['password'])) {
+        $update = ['username' => $request['form']['username']];
+        $_SESSION['username'] = $update['username'];
+        if (!empty($request['form']['password'])) {
+          $update['password'] = password_hash($request['form']['password'], PASSWORD_DEFAULT);
+        }
+        Models\User::find('id', Authentication::getUser()->id)->update($update);
+      }
+      if ($request['form']['email'] !== Models\Configuration::all()->email) {
         Models\Configuration::update(['email' => $request['form']['email']]);
       }
       header('location: /admin/settings');

@@ -1,7 +1,7 @@
 <?php
   class Router {
     private $controller;
-    private $action = 'index';
+    private $action = 'Index';
     private $params = [
       'url' => [], 
       'form' => [],
@@ -11,13 +11,14 @@
     function __construct() {
       $request = $_REQUEST;
       $url = $this->parseURL($request['url']);
-      $this->controller = $url[0] ?: 'index';
-      $this->controller = $this->controller == 'index.php' ? 'index' : $this->controller;
+      $this->controller = ucfirst($url[0]) ?: 'Index';
+      $this->controller = $this->controller === 'Index.php' ? 'Index' : $this->controller;
+      $this->controller .= 'Controller';
       array_shift($url);
       if (!$url) {
         $this->start();
       } else {
-        $this->action = $url[0];
+        $this->action = ucfirst($url[0]);
         array_shift($url);
         $this->params['url'] = $url;
         unset($request['url']);
@@ -32,10 +33,14 @@
     }
 
     private function start() {
-      $controllerAction = ucfirst($this->controller).ucfirst($this->action);
-      if (!method_exists('Controllers', $controllerAction)) {
-        $controllerAction = 'Error404';
+      $controller = $this->controller;
+      if (!file_exists(__DIR__ . "/Controllers/{$controller}.php")
+        || !method_exists("Controllers\\{$controller}", $this->action)
+      ) {
+        $controller = 'ErrorController';
+        $this->action = 'Index';
       }
-      call_user_func_array([new Controllers, $controllerAction], [$this->params]);
+      $controller = 'Controllers\\' . $controller;
+      call_user_func_array([new $controller, $this->action], [$this->params]);
     }
   }
