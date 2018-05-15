@@ -17,4 +17,16 @@
       move_uploaded_file($file['tmp_name'], $location);
       return $location;
     }
+
+    static function image($image, $destination = 'img/portfolio/', $maxSize = 5242880, $name = false) {
+      if (!self::validateFile($image, [
+        'image/jpeg', 
+        'image/png', 
+        'image/gif', 
+        'image/x-ms-bmp'
+      ], $maxSize)) {
+        return false;
+      }
+      return self::complete($image, $destination, $name ?: bin2hex(random_bytes(5)));
+    }
   }

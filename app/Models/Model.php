@@ -10,7 +10,7 @@
     private function __construct() {
       $this->db = \Database::getInstance()->getConnection();
       $className = explode('\\', get_class($this));
-      $this->table = $table ?: strtolower(end($className)) . 's';
+      $this->table = $this->table ?: strtolower(end($className)) . 's';
     }
 
     static function all() {
@@ -35,7 +35,7 @@
       }
       $stmt->free_result();
       $stmt->close();
-      $self->result = $result;
+      $self->result = array_reverse($result);
       return $self;
     }
 
@@ -53,7 +53,7 @@
         }
         $parameters_type = '';
         foreach ($parameters as $parameter) {
-          $parameters_type .= gettype($parameter)[0];
+          $parameters_type .= gettype($parameter)[0] !== 'N' ? gettype($parameter)[0] : 's';
         }
         $stmt->bind_param($parameters_type, ...array_values($parameters));
         $stmt->execute();
@@ -69,7 +69,7 @@
         if (!in_array($key, $this->fillables)) {
           trigger_error('Invalid column name', E_USER_ERROR);
         }
-        $parameters_type .= gettype($value)[0];
+        $parameters_type .= gettype($value)[0] !== 'N' ? gettype($value[0])[0] : 's';
         array_push($parameters, $value);
         $query .= "{$key} = ?, ";
       }
@@ -77,6 +77,7 @@
       $query .= ' WHERE id = ?';
       $parameters_type .= 'i';
       $stmt = $this->db->prepare($query);
+      var_dump($parameters_type, $parameters);
       foreach ($this->result as $row) {
         array_push($parameters, $row['id']);
         $stmt->bind_param($parameters_type, ...$parameters);
