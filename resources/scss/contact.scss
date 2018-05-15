@@ -22,7 +22,7 @@
       display: inline-block;
       margin-top: .5em;
     }
-    input, textarea {
+    input, textarea, button {
       padding: .75em;
       outline: none;
       border: 2px solid #aaa;
@@ -30,14 +30,14 @@
       margin-top: .5em;
       width: 100%;
     }
-    input[type="submit"] {
+    input[type="submit"], button {
       cursor: pointer;
       color: $white;
       background-color: $secondary-color;
       font-weight: 600;
       border: 2px solid $secondary-color;
     }
-    input[type="submit"]:hover {
+    input[type="submit"]:hover, button:hover {
       transition: ease .25s;
       color: $secondary-color;
       background-color: $white;
@@ -63,6 +63,12 @@
     a {
       color: $links;
     }
+  }
+
+  p.alert {
+    margin-top: .5em;
+    background-color: #ccc;
+    padding: 1em;
   }
 
   @media screen and (max-width: 960px) {

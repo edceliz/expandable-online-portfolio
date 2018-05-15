@@ -62,4 +62,20 @@
       }
       return $user;
     }
+
+    static function validateCaptcha($response) {
+      $parameters = [
+        'secret' => $_ENV['RECAPTCHA_SERVER'],
+        'response' => $response
+      ];
+      $curl_handle = curl_init();
+      curl_setopt($curl_handle, CURLOPT_URL, 'https://www.google.com/recaptcha/api/siteverify');
+      curl_setopt($curl_handle, CURLOPT_POST, 1);
+      curl_setopt($curl_handle, CURLOPT_POSTFIELDS, http_build_query($parameters));
+      curl_setopt($curl_handle, CURLOPT_SSL_VERIFYPEER, false);
+      curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, true);
+      $res = json_decode(curl_exec($curl_handle));
+      curl_close($curl_handle);
+      return $res;
+    }
   }

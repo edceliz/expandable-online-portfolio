@@ -2,22 +2,49 @@
 { block head }
   {{ parent() }}
   <link rel="stylesheet" href="/css/contact.css">
+  <script src='https://www.google.com/recaptcha/api.js' async defer></script>
+  <script>
+    function onSubmit(token) {{ '{' }}
+      if (document.getElementById("contact").checkValidity()) {{ '{' }}
+        document.getElementById("contact").submit();
+      {{ '}' }}
+      const tmpSubmit = document.createElement('button');
+      document.getElementById("contact").appendChild(tmpSubmit);
+      tmpSubmit.click();
+      document.getElementById("contact").removeChild(tmpSubmit);
+      grecaptcha.reset();
+    {{ '}' }}
+  </script>
 { endblock }
+{ block name }{{ name }}{ endblock }
+{ block description }{{ description }}{ endblock }
 { block title }Contact{ endblock }
 { block menu_2 }active{ endblock }
 { block page_title }Contact{ endblock }
 { block content }
   <div class="contact__container">
     <section>
-      <form action="/contact/inquire" method="POST">
+      <form action="/contact/inquire" method="POST" id="contact">
+        <input type="hidden" name="token" value="{{ token }}">
         <h3>Contact Form</h3>
+        { if status == 'success' }
+        <p class="alert">Message sent!</p>
+        { elseif status == 'error' }
+        <p class="alert">Message not sent!</p>
+        { endif }
         <label for="name">Name</label>
         <input type="text" name="name" id="name" placeholder="Name" required>
         <label for="email">E-mail Address</label>
         <input type="email" name="email" id="email" placeholder="E-mail Address" required>
         <label for="message">Message</label>
         <textarea name="message" id="message" placeholder="Enter your message here..." autocomplete="off" required></textarea>
-        <input type="submit">
+        <button 
+          class="g-recaptcha" 
+          type="submit"
+          data-sitekey="6LezHjAUAAAAAG3h2fVhuSv5sJkgrClvoFDtE_Ib" 
+          data-callback="onSubmit">
+          Submit
+        </button>
       </form>
     </section>
     <section>

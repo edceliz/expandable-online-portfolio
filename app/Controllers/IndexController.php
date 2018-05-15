@@ -3,6 +3,12 @@
 
   class IndexController extends Controller {
     function Index() {
-      self::render('index', ['works' => \Models\Work::all()->result]);
+      $website = \Models\Configuration::all();
+      self::render('index', [
+        'works' => \Models\Work::all()->result, 
+        'name' => $website->name,
+        'description' => $website->tagline
+        ]
+      );
     }
   }
