@@ -11,9 +11,10 @@
     static function update($update) {
       $configuration = self::all();
       foreach ($update as $key => $value) {
-        if ($value) {
-          $configuration->$key = $value;
+        if ($key === 'resume' && !$value) {
+          continue;
         }
+        $configuration->$key = $value;
       }
       file_put_contents(self::$file, json_encode($configuration));
     }

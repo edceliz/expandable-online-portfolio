@@ -23,10 +23,10 @@
     <section>
       <h3>Contact Information</h3>
       <ul>
-        <li>Phone Number: <a href="tel:+639166798585">+63 916 679 8585</a></li>
-        <li>E-mail Address: <a href="mailto:edceliz01@gmail.com">edceliz01@gmail.com</a></li>
-        <li>Facebook: <a href="https://www.facebook.com/ph.sel">https://www.facebook.com/ph.sel</a></li>
-        <li>GitHub: <a href="https://github.com/edceliz">https://github.com/edceliz</a></li>
+        <li>Phone Number: <a href="tel:{{ user.phone }}">{{ user.phone }}</a></li>
+        <li>E-mail Address: <a href="mailto:{{ user.email }}">{{ user.email }}</a></li>
+        <li>Facebook: <a href="{{ user.facebook }}">{{ user.facebook }}</a></li>
+        <li>GitHub: <a href="{{ user.github }}">{{ user.github }}</a></li>
       </ul>
     </section>
   </div>

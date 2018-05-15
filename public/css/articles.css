@@ -56,13 +56,14 @@ article {
 .article--left .article__content {
   padding-left: 1em; }
 
-.article--right .article__content {
-  text-align: right;
-  padding-right: 1em; }
-@media screen and (max-width: 768px) {
-  .article--right {
-    flex-direction: column-reverse; }
+.article--right {
+  flex-direction: row-reverse; }
+  .article--right .article__content {
+    text-align: right;
+    padding-right: 1em; }
+  @media screen and (max-width: 768px) {
     .article--right .article__content {
+      flex-direction: column-reverse;
       text-align: left; } }
 
 @media screen and (max-width: 768px) {

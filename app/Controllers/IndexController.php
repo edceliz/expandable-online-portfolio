@@ -3,6 +3,6 @@
 
   class IndexController extends Controller {
     function Index() {
-      self::render('index');
+      self::render('index', ['works' => \Models\Work::all()->result]);
     }
   }

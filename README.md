@@ -48,6 +48,12 @@ Views are powered by Symfony's Twig templating system. Rendering a view is done 
 
 > `self::render('view-name', ['name' => 'Sample']) // The Twig file on views folder will automatically be rendered.`
 
+**SASS/SCSS**
+
+CSS Styling can be done with SASS/SCSS. The files can be found on `/resources/scss` folder. Running the following command will automatically process all changes in your SCSS file during production to `/public/css` folder.
+
+> `sass --watch resources/scss:public/css`
+
 ### Other Features
 There are also other features such as `Database`, `Authentication` and `Upload` which helps on managing other operations.
 

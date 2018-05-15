@@ -124,8 +124,8 @@
 
     function UpdateWork($request) {
       if (!\Authentication::verifyCSRFToken('admin_work', $request['form']['token']) || !(int) $request['url'][0]) {
-        // header('location: /admin');
-        // die();
+        header('location: /admin');
+        die();
       }
       switch ($request['form']['operation']) {
         case 'Create/Update Work':

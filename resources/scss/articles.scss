@@ -70,13 +70,14 @@ article:first-of-type {
 }
 
 .article--right {
+  flex-direction: row-reverse;
   .article__content {
     text-align: right;
     padding-right: 1em;
   }
   @media screen and (max-width: 768px) {
-    flex-direction: column-reverse;
     .article__content {
+      flex-direction: column-reverse;
       text-align: left;
     }
   }
