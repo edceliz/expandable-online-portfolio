@@ -1,7 +1,17 @@
 <?php
   namespace Controllers;
 
+  /**
+   * Inheritable class that provides children class with rendering capability.
+   */
   class Controller {
+    /**
+     * Outputs the selected view of the user with its parameters.
+     *
+     * @param string $view
+     * @param array $params
+     * @return void
+     */
     static function render($view, $params = []) {
       $loader = new \Twig_Loader_Filesystem('../views');
       $settings = [

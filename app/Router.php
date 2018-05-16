@@ -1,7 +1,29 @@
 <?php
+  /**
+   * A dynamic router that parses URL into controller, action and parameters.
+   */
   class Router {
+    /**
+     * The specified controller base on the URL.
+     *
+     * @var string
+     */
     private $controller;
+
+    /**
+     * The function of the controller to be performed.
+     *
+     * @var string
+     */
     private $action = 'Index';
+
+    /**
+     * URL - Parameters included on the requested URL.
+     * FORM - Contains values submitted using a form (POST)
+     * FILES - Contains files that are submitted using form (POST)
+     * 
+     * @var array
+     */
     private $params = [
       'url' => [], 
       'form' => [],
@@ -32,6 +54,11 @@
       return explode('/', filter_var(rtrim($params, '/'), FILTER_SANITIZE_URL));
     }
 
+    /**
+     * Call the specified action of the controller and pass the parameters.
+     *
+     * @return void
+     */
     private function start() {
       $controller = $this->controller;
       if (!file_exists(__DIR__ . "/Controllers/{$controller}.php")

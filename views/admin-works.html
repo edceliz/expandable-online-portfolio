@@ -17,37 +17,15 @@
         <a href="/admin/work" class="article__cta">Add Work</a>
       </div>
     </article>
+    { for work in works }
     <article>
       <div class="article__content">
-        <h3>Sample</h3>
-        <p class="article__subtitle">April 2018 - Present</p>
-        <p class="article__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente deserunt et voluptate numquam doloribus corporis quis quas, labore unde. Sapiente laboriosam illum beatae id voluptates quia est explicabo a accusantium.</p>
-        <a href="#" class="article__cta">Edit</a>
+        <h3>{{ work.title }}</h3>
+        <p class="article__subtitle">{{ work.subtitle }}</p>
+        <p class="article__description">{{ work.description }}</p>
+        <a href="/admin/work/{{ work.id }}" class="article__cta">Edit</a>
       </div>
     </article>
-    <article>
-      <div class="article__content">
-        <h3>Sample</h3>
-        <p class="article__subtitle">April 2018 - Present</p>
-        <p class="article__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente deserunt et voluptate numquam doloribus corporis quis quas, labore unde. Sapiente laboriosam illum beatae id voluptates quia est explicabo a accusantium.</p>
-        <a href="#" class="article__cta">Edit</a>
-      </div>
-    </article>
-    <article>
-      <div class="article__content">
-        <h3>Sample</h3>
-        <p class="article__subtitle">April 2018 - Present</p>
-        <p class="article__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente deserunt et voluptate numquam doloribus corporis quis quas, labore unde. Sapiente laboriosam illum beatae id voluptates quia est explicabo a accusantium.</p>
-        <a href="#" class="article__cta">Edit</a>
-      </div>
-    </article>
-    <article>
-      <div class="article__content">
-        <h3>Sample</h3>
-        <p class="article__subtitle">April 2018 - Present</p>
-        <p class="article__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente deserunt et voluptate numquam doloribus corporis quis quas, labore unde. Sapiente laboriosam illum beatae id voluptates quia est explicabo a accusantium.</p>
-        <a href="#" class="article__cta">Edit</a>
-      </div>
-    </article>
+    { endfor }
   </section>
 { endblock }

@@ -48,6 +48,16 @@ Views are powered by Symfony's Twig templating system. Rendering a view is done 
 
 > `self::render('view-name', ['name' => 'Sample']) // The Twig file on views folder will automatically be rendered.`
 
+**Twig**
+
+The configured Twig delimeter for `block` is `{ #block }` and `variable` is `{{ variable }}`.
+
+**SASS/SCSS**
+
+CSS Styling can be done with SASS/SCSS. The files can be found on `/resources/scss` folder. Running the following command will automatically process all changes in your SCSS file during production to `/public/css` folder.
+
+> `sass --watch resources/scss:public/css`
+
 ### Other Features
 There are also other features such as `Database`, `Authentication` and `Upload` which helps on managing other operations.
 
@@ -64,6 +74,10 @@ This is used for checking the login status of user and managing other things reg
 **Upload**
 
 This handles uploading of files into system.
+
+**Google reCAPTCHA**
+
+The application uses Google reCAPTCHA to validate contact form submission. Please provide the required values in the `.env` file.
 
 ### Contact/Help
 
