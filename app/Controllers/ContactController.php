@@ -1,7 +1,16 @@
 <?php
   namespace Controllers;
 
+  /**
+   * Handles contact related actions.
+   */
   class ContactController extends Controller {
+    /**
+     * Renders contact page.
+     *
+     * @param array $request
+     * @return void
+     */
     function Index($request) {
       $status = isset($request['url'][0]) ? $request['url'][0] : false;
       $website = \Models\Configuration::all();
@@ -17,6 +26,12 @@
       );
     }
 
+    /**
+     * Handles form submission.
+     *
+     * @param array $request
+     * @return void
+     */
     function Inquire($request) {
       $form = $request['form'];
       if (isset($form['token'])
@@ -38,6 +53,11 @@
       }
     }
 
+    /**
+     * Provides a download for the saved resume.
+     *
+     * @return void
+     */
     function Resume() {
       $file_url = \Models\Configuration::all()->resume;
       header('Content-Type: application/octet-stream');

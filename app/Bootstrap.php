@@ -1,5 +1,13 @@
 <?php
+  /**
+   * Responsible for starting the application
+   */
   class Bootstrap {
+    /**
+     * Prepare some core dependencies of the application and running configuration.
+     *
+     * @return void
+     */
     static function run() {
       require_once('../vendor/autoload.php');
       $dotenv = new Dotenv\Dotenv('../');

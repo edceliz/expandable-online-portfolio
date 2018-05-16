@@ -1,10 +1,26 @@
 <?php
+  /**
+   * Handles authentication related functions.
+   */
   class Authentication {
+    /**
+     * Creates a token that can be used in forms for CSRF.
+     *
+     * @param string $name - Name of the token
+     * @return string
+     */
     static function generateCSRFToken($name) {
       $_SESSION[$name . '_token'] = bin2hex(random_bytes(32));
       return $_SESSION[$name . '_token'];
     }
 
+    /**
+     * Verifies the submitted token with the selected token name.
+     *
+     * @param string $name
+     * @param string $token
+     * @return void
+     */
     static function verifyCSRFToken($name, $token) {
       $result = false;
       if (isset($_SESSION[$name . '_token'])) {
@@ -27,6 +43,13 @@
       return $_SESSION['uid'] ?: false;
     }
 
+    /**
+     * Logs in user upon submission of correct credentials.
+     *
+     * @param string $username
+     * @param string $password
+     * @return boolean
+     */
     static function login($username, $password) {
       $db = Database::getInstance()->getConnection();
       $stmt = $db->prepare('SELECT id, password FROM users WHERE username = ? LIMIT 1');
@@ -44,6 +67,12 @@
       }
     }
 
+    /**
+     * Checks if submitted password is same with the logged in user's current password.
+     *
+     * @param string $password
+     * @return void
+     */
     static function verifyPassword($password) {
       $db = Database::getInstance()->getConnection();
       $stmt = $db->prepare('SELECT password from users WHERE id = ? LIMIT 1');
@@ -54,6 +83,11 @@
       return password_verify($password, $result['password']);
     }
 
+    /**
+     * Returns user's information.
+     *
+     * @return stdObject
+     */
     static function getUser() {
       $user = (object) ['id' => null, 'username' => null];
       if (isset($_SESSION['uid'])) {
@@ -63,6 +97,12 @@
       return $user;
     }
 
+    /**
+     * Connects with reCAPTCHA API for validation.
+     *
+     * @param string $response
+     * @return stdObject
+     */
     static function validateCaptcha($response) {
       $parameters = [
         'secret' => $_ENV['RECAPTCHA_SERVER'],

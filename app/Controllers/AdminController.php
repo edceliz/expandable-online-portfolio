@@ -1,7 +1,15 @@
 <?php
   namespace Controllers;
 
+  /**
+   * Handles admin related actions.
+   */
   class AdminController extends Controller {
+    /**
+     * Checks if user is logged in.
+     *
+     * @return void
+     */
     private function middleware() {
       if (!\Authentication::checkLogin()) {
         header('location: /admin/login');
@@ -9,11 +17,21 @@
       }
     }
 
+    /**
+     * Renders home page for admin side.
+     *
+     * @return void
+     */
     function Index() {
       $this->middleware();
       self::render('admin-works', ['works' => \Models\Work::all()->result]);
     }
 
+    /**
+     * Renders settings page for admin side.
+     *
+     * @return void
+     */
     function Settings() {
       $this->middleware();
       $configuration = \Models\Configuration::all();
@@ -25,12 +43,17 @@
       );
     }
 
+    /**
+     * Handles website settings submission.
+     *
+     * @param array $request
+     * @return void
+     */
     function Website($request) {
       $this->middleware();
       if (isset($request['form']['token'])
         && \Authentication::verifyCSRFToken('admin_settings', $request['form']['token'])
       ) {
-        $file = false;
         if ($request['files']['resume']['error'] !== 4) {
           if (!\Upload::validateFile($request['files']['resume'], 
             [
@@ -43,15 +66,12 @@
             header('location: /admin/settings/error/1');
             die();
           }
-          $file = \Upload::complete($request['files']['resume'], 'downloadables/', 'resume');
+          $request['form']['resume'] = \Upload::complete($request['files']['resume'], 'downloadables/', 'resume');
         }
-        $profile = false;
         if ($request['files']['profile']['error'] !== 4) {
-          $profile = \Upload::image($request['files']['profile'], 'img/', 'profile');
+          $request['form']['profile'] = \Upload::image($request['files']['profile'], 'img/', 'profile');
         }
         unset($request['form']['token']);
-        $request['form']['profile'] = $profile;
-        $request['form']['resume'] = $file;
         \Models\Configuration::update($request['form']);
         header('location: /admin/settings/success');
       } else {
@@ -59,6 +79,12 @@
       }
     }
 
+    /**
+     * Handles account settings submission.
+     *
+     * @param array $request
+     * @return void
+     */
     function Account($request) {
       $this->middleware();
       if (!isset($request['form']['token'])
@@ -82,6 +108,12 @@
       header('location: /admin/settings/success');
     }
 
+    /**
+     * Renders a form for creating new work or updating existing work.
+     *
+     * @param array $request
+     * @return void
+     */
     function Work($request) {
       $this->middleware();
       if (isset($request['url'][0]) && (int) $request['url'][0]) {
@@ -98,6 +130,12 @@
       }
     }
 
+    /**
+     * Handles new work submission.
+     *
+     * @param array $request
+     * @return void
+     */
     function AddWork($request) {
       $this->middleware();
       if (isset($request['form']['token'])
@@ -127,6 +165,12 @@
       }
     }
 
+    /**
+     * Handles work update submission.
+     *
+     * @param array $request
+     * @return void
+     */
     function UpdateWork($request) {
       if (!\Authentication::verifyCSRFToken('admin_work', $request['form']['token']) || !(int) $request['url'][0]) {
         header('location: /admin');
@@ -160,6 +204,12 @@
       }
     }
 
+    /**
+     * Renders and handle login for admin side.
+     *
+     * @param array $request
+     * @return void
+     */
     function Login($request) {
       if (isset($request['form']['token']) 
         && \Authentication::verifyCSRFToken('admin_login', $request['form']['token']) 
@@ -171,6 +221,11 @@
       }
     }
 
+    /**
+     * Logs the admin out of the admin panel.
+     *
+     * @return void
+     */
     function Logout() {
       \Authentication::logout();
       header('location: /');

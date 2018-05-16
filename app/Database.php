@@ -1,8 +1,27 @@
 <?php
+  /**
+   * Singleton implementation of database connection.
+   */
   class Database {
+    /**
+     * Instance of this class.
+     *
+     * @var Database
+     */
     protected static $instance;
+
+    /**
+     * Instance of mysqli connection.
+     *
+     * @var mysqli
+     */
     private $db;
 
+    /**
+     * Returns the existing/or create new instance of class.
+     *
+     * @return Database
+     */
     static function getInstance() {
       if (!self::$instance) {
         self::$instance = new self();
