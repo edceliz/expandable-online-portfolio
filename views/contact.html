@@ -19,6 +19,7 @@
 { block name }{{ name }}{ endblock }
 { block description }{{ description }}{ endblock }
 { block title }Contact{ endblock }
+{ block profile }{{ profile }}{ endblock }
 { block menu_2 }active{ endblock }
 { block page_title }Contact{ endblock }
 { block content }
@@ -41,7 +42,7 @@
         <button 
           class="g-recaptcha" 
           type="submit"
-          data-sitekey="6LezHjAUAAAAAG3h2fVhuSv5sJkgrClvoFDtE_Ib" 
+          data-sitekey="{{ recaptcha }}" 
           data-callback="onSubmit">
           Submit
         </button>

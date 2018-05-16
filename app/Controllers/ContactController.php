@@ -10,7 +10,9 @@
           'token' => \Authentication::generateCSRFToken('contact'),
           'status' => $status,
           'name' => $website->name,
-          'description' => $website->tagline
+          'description' => $website->tagline,
+          'profile' => $website->profile,
+          'recaptcha' => $_ENV['RECAPTCHA_CLIENT']
         ]
       );
     }

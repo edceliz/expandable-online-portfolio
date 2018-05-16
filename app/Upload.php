@@ -18,7 +18,7 @@
       return $location;
     }
 
-    static function image($image, $destination = 'img/portfolio/', $maxSize = 5242880, $name = false) {
+    static function image($image, $destination = 'img/portfolio/', $name = false, $maxSize = 5242880) {
       if (!self::validateFile($image, [
         'image/jpeg', 
         'image/png', 

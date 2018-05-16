@@ -75,6 +75,10 @@ This is used for checking the login status of user and managing other things reg
 
 This handles uploading of files into system.
 
+**Google reCAPTCHA**
+
+The application uses Google reCAPTCHA to validate contact form submission. Please provide the required values in the `.env` file.
+
 ### Contact/Help
 
 For questions and inquiries, please contact me at edceliz01@gmail.com.

@@ -7,7 +7,8 @@
       self::render('index', [
         'works' => \Models\Work::all()->result, 
         'name' => $website->name,
-        'description' => $website->tagline
+        'description' => $website->tagline,
+        'profile' => $website->profile
         ]
       );
     }

@@ -45,7 +45,12 @@
           }
           $file = \Upload::complete($request['files']['resume'], 'downloadables/', 'resume');
         }
-        array_shift($request['form']);
+        $profile = false;
+        if ($request['files']['profile']['error'] !== 4) {
+          $profile = \Upload::image($request['files']['profile'], 'img/', 'profile');
+        }
+        unset($request['form']['token']);
+        $request['form']['profile'] = $profile;
         $request['form']['resume'] = $file;
         \Models\Configuration::update($request['form']);
         header('location: /admin/settings/success');
